@@ -22,9 +22,9 @@ def read_from_db():
     # fetch result from query
     results = cursor.fetchall()
 
-    #print(results)
-    #x = dict()
-    #print(x)
+    # print(results)
+    # x = dict()
+    # print(x)
 
     # close cursor and connection
     cursor.close()
@@ -38,7 +38,6 @@ def read_from_db():
 
 
 def insert_new_task(description, urgent):
-
     query = "INSERT INTO task (description,urgent) VALUES (%s,%s)"
 
     # connectione to database
@@ -58,18 +57,26 @@ def insert_new_task(description, urgent):
 
     return temp
 
-def delete_task(id_task):
 
-    query= "DELETE FROM task WHERE id=(%s)"
+def updating_Db(description, id):
+    query = "UPDATE task SET description=(%s) WHERE id=(%s)"
+
+    connection = pymysql.connect(user="root", password="Matrix9697", host="localhost", database="todolist")
+    cursor = connection.cursor()
+    cursor.execute(query, (description, id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+
+def delete_task(id_task):
+    query = "DELETE FROM task WHERE id=(%s)"
 
     # connectione to database
     connection = pymysql.connect(user="root", password="Matrix9697", host="localhost", database="first")
 
     cursor = connection.cursor()
-
     cursor.execute(query, (id_task,))
-
     connection.commit()
-
     cursor.close()
     connection.close()

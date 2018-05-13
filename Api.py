@@ -32,9 +32,31 @@ def newTask():
 def searchTask(id):
     id_n = int(id)
     task = [task for task in task_list if task['id'] == id_n]
-    print(task, len(task))
     if len(task) != 0:
         return jsonify(task[0])
+
+#Point d: Updating of the task
+@app.route('/tasks/<id>', methods=["PATCH"])
+def updateTask(id):
+    id_n = int(id)
+    description = request.json
+    task = [task for task in task_list if task['id'] == id_n]
+    if len(task) != 0:
+        Database.updating_Db(id_n, description)
+        return jsonify(task[0])
+
+#Point e: Elimination of a task
+@app.route('/tasks/<id>', methods=["DELETE"])
+def deleteTask(id):
+    id_n = int(id)
+    task = [task for task in task_list if task['id'] == id_n]
+    print(task)
+    if len(task) != 0:
+        task_list.remove(task[0])
+        Database.delete_task(id_n)
+        return jsonify(task[0])
+        #description=task[0]['description']
+		# print(task)
 
 
 

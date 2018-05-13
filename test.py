@@ -23,3 +23,17 @@ if __name__ == '__main__':
     response=getting.json()
     print("\n"+"Checking the search for a task given the id: ")
     print(response)
+
+
+    #Check (d): Updating of the task
+    id = task_list[0]['id']
+    new_description = "Check of the updating:"
+    print("\n"+new_description)
+    response = requests.patch(base_url + 'tasks/' + str(id), json=new_description)
+    print(response)
+
+    #Check (e):Delete a task
+    id = task_list[0]['id']
+    response = requests.delete(base_url + "tasks/" + str(id))
+    print("\n" + "Checking the elimination: ")
+    print(response.json())
