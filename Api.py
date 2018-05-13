@@ -55,10 +55,6 @@ def deleteTask(id):
         task_list.remove(task[0])
         Database.delete_task(id_n)
         return jsonify(task[0])
-        #description=task[0]['description']
-		# print(task)
-
-
 
 if __name__ == '__main__':
 
